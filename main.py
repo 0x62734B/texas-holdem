@@ -4,5 +4,7 @@ import screen
 def main():
     screen.FILL()
 
-pygame.init()
-main()
+
+if __name__=='__main__':
+    pygame.init()
+    main()
