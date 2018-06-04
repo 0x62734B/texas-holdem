@@ -628,6 +628,8 @@ def GAME_AI_SCREEN(mode):
                 elif not p_list[bet_turn].get_thinking or (betted[2] != bet_state and p_list[2].get_thinked):
                     p_list[2].think(c_cards, race_step, bet_state, p_list[1].get_chips)
 
+            print(bet_turn)
+
             rFont = pygame.font.Font(c.FONT_TYPE, 50)
             now_round = rFont.render("<" + mode + " ROUND " + str(race_step) + ">", True, (255,31,31))
             c.SCREEN.blit(now_round, (30,30))
