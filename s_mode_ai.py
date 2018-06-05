@@ -160,7 +160,7 @@ def get_rank(card_list):
     # 146 ~ 158 One Pair
     # 159 ~ 166 High Card
 
-    rank_name = "High_Card"
+    rank_name = "HIGH CARD"
     rank = 173 - max(rank_list)
 
     Four_card = False
@@ -181,20 +181,20 @@ def get_rank(card_list):
     if Four_card_number > 0:
         Four_card = True
         rank = 25 - Four_card_number
-        rank_name = "Four_Card"
+        rank_name = "FOUR CARD"
 
     elif Triple_list != []:
         if Pair_list != []:             # Full House
             Full_House = True
             rank = 38 - Triple_list[0]
-            rank_name = "Full_House"
+            rank_name = "FULL HOUSE"
         else:
             rank = 69 - Triple_list[0]
-            rank_name = "Triple"
+            rank_name = "TRIPLE"
 
     elif Pair_list != []:
         if len(Pair_list) >= 2:
-            rank_name = "Two_Pair"
+            rank_name = "TWO PAIR"
             if Pair_list[0] == 14:
                 rank = 81 - Pair_list[1]
             elif Pair_list[0] == 13:
@@ -222,7 +222,7 @@ def get_rank(card_list):
         elif len(Pair_list) == 1:
             if rank > 146:
                 rank = 160 - Pair_list[0]
-                rank_name = "One_Pair"
+                rank_name = "ONE PAIR"
     for x in range(0, len(hand) -1):
         if rank_list[len(hand)-1-x] == rank_list[len(hand)-2-x]:
                     del rank_list[len(hand)-1-x]
@@ -240,15 +240,15 @@ def get_rank(card_list):
         if Straight:
             if top_number == 14:
                 rank = 45
-                rank_name = "Straight"
+                rank_name = "STRAIGHT"
             else:
                 rank = 59 - top_number
-                rank_name = "Straight"
+                rank_name = "STRAIGHT"
         if 2 in rank_list and 3 in rank_list and \
             4 in rank_list and 5 in rank_list and \
             14 in rank_list:                          # A 2 3 4 5 스트레이트는 숫자상으로 2 3 4 5 14 이므로 이렇게 표현
             rank = 54
-            rank_name = "Straight"
+            rank_name = "STRAIGHT"
 
     suit_list = []
     for x in hand:
@@ -268,7 +268,7 @@ def get_rank(card_list):
             for x in hand:
                 num.append(x[1])
             rank = 51 - max(num)
-            rank_name = "Flush"
+            rank_name = "FLUSH"
         elif suit_list.count(1) >= 5:
             Flush = True
             pattern_num = 1
@@ -278,7 +278,7 @@ def get_rank(card_list):
             for x in hand:
                 num.append(x[1])
             rank = 51 - max(num)
-            rank_name = "Flush"
+            rank_name = "FLUSH"
         elif suit_list.count(2) >= 5:
             Flush = True
             pattern_num = 2
@@ -288,7 +288,7 @@ def get_rank(card_list):
             for x in hand:
                 num.append(x[1])
             rank = 51 - max(num)
-            rank_name = "Flush"
+            rank_name = "FLUSH"
         elif suit_list.count(3) >= 5:
             Flush = True
             pattern_num = 3
@@ -298,7 +298,7 @@ def get_rank(card_list):
             for x in hand:
                 num.append(x[1])
             rank = 51 - max(num)
-            rank_name = "Flush"
+            rank_name = "FLUSH"
         num_len = len(num)
         if Flush:
             for x in range(0, num_len - 1):
@@ -312,13 +312,13 @@ def get_rank(card_list):
                     num[4]-num[3] == 1:
                     if max(num) == 14:
                         rank = 1
-                        rank_name = "Royal_Flush"
+                        rank_name = "ROYAL FLUSH"
                     else:
                         rank = 15 - max(num)
-                        rank_name = "Straight_Flush"
+                        rank_name = "STRAIGHT FLUSH"
                 if num == [2, 3, 4, 5, 14]:
                     rank = 10
-                    rank_name = "Straight_Flush"
+                    rank_name = "STRAIGHT FLUSH"
 
     return (rank, rank_name)
 

@@ -94,12 +94,6 @@ class ai:
         self.__thinking = False
         self.__thinked = True
 
-    def test(self, cards):
-        card_list = []
-        for i in self.__cards + cards:
-            card_list.append(list(i.get_card))
-        return print(card_list)
-
     def my_rank(self, cards):
         card_list = []
         for i in self.__cards + cards:
@@ -156,16 +150,9 @@ class ai:
         bluffing_list = [50, 50, 50, 100, 100, 200, 300]
         expected = bet_state - self.__betted
 
-        # 쥐잡기
-        print(bet_state)
-        print(step)
-        print(expected)
-        print(self.__betted)
-
-
         # 배팅
         if step == 1:
-            if tree in ("High_Card", "One_Pair"):
+            if tree in ("HIGH CARD", "ONE PAIR"):
                 if bet_state < 100:
                     if 10 < rand <= 90:
                         if expected <= 100:
@@ -186,7 +173,7 @@ class ai:
                 self.bet(expected)
 
         elif step == 2:
-            if tree[1] == "High_Card":
+            if tree[1] == "HIGH CARD":
                 if bet_state < 100:
                     if 40 < bluffing <= 70:
                         if expected + 100 > p_chips:
@@ -209,7 +196,7 @@ class ai:
                             self.bet(expected + 100)
                     else:
                         self.bet(-1)
-            elif tree[1] == "One_Pair":
+            elif tree[1] == "ONE PAIR":
                 if bet_state < 150:
                     if 40 < bluffing <= 70:
                         random.shuffle(bluffing_list)
@@ -234,7 +221,7 @@ class ai:
                             self.bet(expected + bluffing_list[0])
                     else:
                         self.bet(-1)
-            elif tree[1] == "Two_Pair":
+            elif tree[1] == "TWO PAIR":
                 if 40 < bluffing <= 70:
                     random.shuffle(bluffing_list)
                     if expected + bluffing_list[0] > p_chips:
@@ -242,7 +229,7 @@ class ai:
                     else:
                         self.bet(expected + bluffing_list[0])
                 else:
-                    if c_tree[1] == "Two_Pair":
+                    if c_tree[1] == "TWO PAIR":
                         if 30 < rand <= 70:
                             self.bet(expected)
                         else:
@@ -251,12 +238,15 @@ class ai:
                             else:
                                 self.bet(-1)
                     else:
-                        random.shuffle(betting)
-                        if expected + betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 25 < rand <= 75:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
                         else:
-                            self.bet(expected + betting[0])
-            elif tree[1] == "Triple":
+                            self.bet(expected)
+            elif tree[1] == "TRIPLE":
                 if 40 < bluffing <= 70:
                     random.shuffle(bluffing_list)
                     if expected + bluffing_list[0] > p_chips:
@@ -264,7 +254,7 @@ class ai:
                     else:
                         self.bet(expected + bluffing_list[0])
                 else:
-                    if c_tree[1] == "Triple":
+                    if c_tree[1] == "TRIPLE":
                         if 30 < rand <= 70:
                             self.bet(expected)
                         else:
@@ -273,11 +263,14 @@ class ai:
                             else:
                                 self.bet(-1)
                     else:
-                        random.shuffle(betting)
-                        if expected + betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 20 < rand <= 80:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
                         else:
-                            self.bet(expected + betting[0])
+                            self.bet(expected)
             else:
                 if 40 < bluffing <= 70:
                     random.shuffle(bluffing_list)
@@ -286,13 +279,16 @@ class ai:
                     else:
                         self.bet(expected + bluffing_list[0])
                 else:
-                    random.shuffle(betting)
-                    if expected + betting[0] > p_chips:
-                        self.bet(p_chips)
+                    if 15 < rand <= 85:
+                        random.shuffle(betting)
+                        if expected + betting[0] > p_chips:
+                            self.bet(p_chips)
+                        else:
+                            self.bet(expected + betting[0])
                     else:
-                        self.bet(expected + betting[0])
+                        self.bet(expected)
         elif step == 3:
-            if tree[1] == "High_Card":
+            if tree[1] == "HIGH CARD":
                 if bet_state < 100:
                     if 40 < bluffing <= 70:
                         if expected + 100 > p_chips:
@@ -315,7 +311,7 @@ class ai:
                             self.bet(expected + 100)
                     else:
                         self.bet(-1)
-            elif tree[1] == "One_Pair":
+            elif tree[1] == "ONE PAIR":
                 if bet_state < 150:
                     if 40 < bluffing <= 70:
                         random.shuffle(bluffing_list)
@@ -340,7 +336,7 @@ class ai:
                             self.bet(expected + bluffing_list[0])
                     else:
                         self.bet(-1)
-            elif tree[1] == "Two_Pair":
+            elif tree[1] == "TWO PAIR":
                 if 40 < bluffing <= 70:
                     random.shuffle(bluffing_list)
                     if expected + bluffing_list[0] > p_chips:
@@ -348,7 +344,7 @@ class ai:
                     else:
                         self.bet(expected + bluffing_list[0])
                 else:
-                    if c_tree[1] == "Two_Pair":
+                    if c_tree[1] == "TWO PAIR":
                         if 30 < rand <= 70:
                             self.bet(expected)
                         else:
@@ -357,12 +353,15 @@ class ai:
                             else:
                                 self.bet(-1)
                     else:
-                        random.shuffle(betting)
-                        if expected + betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 30 < rand <= 70:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
                         else:
-                            self.bet(expected + betting[0])
-            elif tree[1] == "Triple":
+                            self.bet(expected)
+            elif tree[1] == "TRIPLE":
                 if 40 < bluffing <= 70:
                     random.shuffle(bluffing_list)
                     if expected + bluffing_list[0] > p_chips:
@@ -370,7 +369,7 @@ class ai:
                     else:
                         self.bet(expected + bluffing_list[0])
                 else:
-                    if c_tree[1] == "Triple":
+                    if c_tree[1] == "TRIPLE":
                         if 30 < rand <= 70:
                             self.bet(expected)
                         else:
@@ -379,12 +378,15 @@ class ai:
                             else:
                                 self.bet(-1)
                     else:
-                        random.shuffle(betting)
-                        if expected + betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 25 < rand <= 75:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
                         else:
-                            self.bet(expected + betting[0])
-            elif tree[1] == "Straight":
+                            self.bet(expected)
+            elif tree[1] == "STRAIGHT":
                 if 40 < bluffing <= 70:
                     random.shuffle(bluffing_list)
                     if expected + bluffing_list[0] > p_chips:
@@ -392,7 +394,7 @@ class ai:
                     else:
                         self.bet(expected + bluffing_list[0])
                 else:
-                    if c_tree[1] == "Straight":
+                    if c_tree[1] == "STRAIGHT":
                         if 30 < rand <= 70:
                             self.bet(expected)
                         else:
@@ -401,12 +403,15 @@ class ai:
                             else:
                                 self.bet(-1)
                     else:
-                        random.shuffle(betting)
-                        if expected + betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 20 < rand <= 80:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
                         else:
-                            self.bet(expected + betting[0])
-            elif tree[1] == "Flush":
+                            self.bet(expected)
+            elif tree[1] == "FLUSH":
                 if 40 < bluffing <= 70:
                     random.shuffle(bluffing_list)
                     if expected + bluffing_list[0] > p_chips:
@@ -414,7 +419,7 @@ class ai:
                     else:
                         self.bet(expected + bluffing_list[0])
                 else:
-                    if c_tree[1] == "Flush":
+                    if c_tree[1] == "FLUSH":
                         if 30 < rand <= 70:
                             self.bet(expected)
                         else:
@@ -423,12 +428,15 @@ class ai:
                             else:
                                 self.bet(-1)
                     else:
-                        random.shuffle(betting)
-                        if expected + betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 20 < rand <= 80:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
                         else:
-                            self.bet(expected + betting[0])
-            elif tree[1] == "Full_House":
+                            self.bet(expected)
+            elif tree[1] == "FULL HOUSE":
                 if 40 < bluffing <= 70:
                     random.shuffle(bluffing_list)
                     if expected + bluffing_list[0] > p_chips:
@@ -436,7 +444,7 @@ class ai:
                     else:
                         self.bet(expected + bluffing_list[0])
                 else:
-                    if c_tree[1] == "Flush":
+                    if c_tree[1] == "FULL HOUSE":
                         if 30 < rand <= 70:
                             self.bet(expected)
                         else:
@@ -445,11 +453,30 @@ class ai:
                             else:
                                 self.bet(-1)
                     else:
+                        if 10 < rand <= 90:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
+                        else:
+                            self.bet(expected)
+            else:
+                if 40 < bluffing <= 70:
+                    random.shuffle(bluffing_list)
+                    if expected + bluffing_list[0] > p_chips:
+                        self.bet(p_chips)
+                    else:
+                        self.bet(expected + bluffing_list[0])
+                else:
+                    if 10 < rand <= 90:
                         random.shuffle(betting)
                         if expected + betting[0] > p_chips:
                             self.bet(p_chips)
                         else:
                             self.bet(expected + betting[0])
+                    else:
+                        self.bet(expected)
 
         elif step == 4:
             if 40 < bluffing <= 70:
@@ -459,40 +486,55 @@ class ai:
                 else:
                     self.bet(expected + bluffing_list[0])
             else:
-                if tree[1] == "Straight":
+                if tree[1] == "STRAIGHT":
                     if P_c_tree == "P_Straight":
                         s_betting = [10, 20, 30, 50]
-                        random.shuffle(s_betting)
-                        if expected + s_betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 30 < rand < 70:
+                            random.shuffle(s_betting)
+                            if expected + s_betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + s_betting[0])
                         else:
-                            self.bet(expected + s_betting[0])
+                            self.bet(expected)
                     else:
-                        random.shuffle(betting)
-                        if expected + betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 30 < rand <= 70:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
                         else:
-                            self.bet(expected + betting[0])
-                elif tree[1] == "Flush":
+                            self.bet(expected)
+                elif tree[1] == "FLUSH":
                     if P_c_tree == "P_Flush":
                         s_betting = [10, 20, 30, 50]
-                        random.shuffle(s_betting)
-                        if expected + s_betting[0] > p_chips:
-                            self.bet(p_chips)
+                        if 30 < rand < 70:
+                            random.shuffle(s_betting)
+                            if expected + s_betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + s_betting[0])
                         else:
-                            self.bet(expected + s_betting[0])
+                            self.bet(expected)
                     else:
+                        if 30 < rand <= 70:
+                            random.shuffle(betting)
+                            if expected + betting[0] > p_chips:
+                                self.bet(p_chips)
+                            else:
+                                self.bet(expected + betting[0])
+                        else:
+                            self.bet(expected)
+                elif tree[1] in ("TWO PAIR", "TRIPLE", "FULL HOUSE", "STRAIGHT FLUSH", "ROYAL FLUSH"):
+                    if 30 < rand <= 70:
                         random.shuffle(betting)
                         if expected + betting[0] > p_chips:
                             self.bet(p_chips)
                         else:
                             self.bet(expected + betting[0])
-                elif tree[1] in ("Two_Pair", "Triple", "Full_House", "Straight_Flush", "Royal_Flush"):
-                    random.shuffle(betting)
-                    if expected + betting[0] > p_chips:
-                        self.bet(p_chips)
                     else:
-                        self.bet(expected + betting[0])
+                        self.bet(expected)
                 else:
                     if bet_state < 100:
                         self.bet(expected)
@@ -503,17 +545,34 @@ class ai:
                             self.bet(-1)
 
         elif step == 5:
-            if tree[1] in ("Triple", "Straight", "Flush", "Full_House", "Straight_Flush", "Royal_Flush"):
-                self.bet(expected)
+            if 50 < bluffing <= 60:
+                random.shuffle(bluffing_list)
+                if expected + bluffing_list[0] > p_chips:
+                    self.bet(p_chips)
+                else:
+                    self.bet(expected + bluffing_list[0])
             else:
-                if bet_state < 100:
+                if tree[1] in ("TRIPLE", "STRAIGHT", "FLUSH", "FULL HOUSE", "STRAIGHT FLUSH", "ROYAL FLUSH"):
                     self.bet(expected)
                 else:
-                    if 25 <  rand < 75:
+                    if bet_state < 100:
                         self.bet(expected)
                     else:
-                        self.bet(-1)
-
+                        if tree[1] == "TWO PAIR":
+                            if 30 < rand < 70:
+                                self.bet(expected)
+                            else:
+                                self.bet(-1)
+                        if tree[1] == "ONE PAIR":
+                            if 40 < rand < 60:
+                                self.bet(expected)
+                            else:
+                                self.bet(-1)
+                        if tree[1] == "HIGH CARD":
+                            if 45 < rand < 55:
+                                self.bet(expected)
+                            else:
+                                self.bet(-1)
 
         if self.__chips < 0:
             s.bet_state += self.__chips
